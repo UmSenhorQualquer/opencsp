@@ -1,0 +1,39 @@
+{% load thumbnail %}
+<div id="applications-list" >
+{% for subject in subjects %}
+	<div class="grp-row">
+	
+	<h3>{{ subject.algorithmsubject_name }}</h3>
+	{% for algo in subject.algorithm_set.all %}	
+	 	<div class='app-block' >
+	 		{% thumbnail algo.algorithm_image "150x150" crop="center" as im %}
+	 		<div class='app-thumbnail' style='background-image:url({{ im.url }})' >
+	 		{% endthumbnail %}
+				<a href="#view-applist-load|{{ algo.algorithm_class }}" onclick="runApplistLoad('{{ algo.algorithm_class }}');" >
+					<div class='title' >{{ algo.algorithm_name }}</div>
+				</a>
+				<div class='thumbLink' >
+					<a href="#view-applist-load|{{ algo.algorithm_class }}" onclick="runApplistLoad('{{ algo.algorithm_class }}');" >Open it</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+{% endfor %}
+</div>
+
+
+{% block extra_scripts %}
+<script type="text/javascript" charset="utf-8">
+	
+	$('.app-thumbnail').mouseenter(function() {
+		$(this).children('.thumbLink').animate({ marginTop: '68px' });
+	});
+
+	$('.app-thumbnail').mouseleave(function() {
+		$(this).children('.thumbLink').animate({  marginTop: '150px' });
+	});
+
+
+</script>
+{% endblock %}

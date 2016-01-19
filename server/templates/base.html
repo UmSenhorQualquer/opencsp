@@ -1,0 +1,26 @@
+{% load jfutags %}{% load url from future %}{% load thumbnail %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Open CSP</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/bootstrap.css" />
+    <link rel="stylesheet" href="/static/main.css" />
+    
+    {% block head %}{% endblock %}
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+    {% include "header.html" %}
+    {% block left_menu %}{% endblock %}
+    {% block body %}{% endblock %}
+    {% block page_content %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block extra_body %}{% endblock %}
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

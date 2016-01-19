@@ -1,0 +1,28 @@
+.content{
+    border-radius: 0 0 10px 10px;
+    padding: 0px;
+    position: relative;
+    display: table-cell;
+}
+
+#content-panel label{
+	min-width: 150px;
+}
+
+#content-panel input[type="text"], #content-panel input[type="password"]{
+    display: inline-block;
+    height: 30px;
+    padding: 4px 6px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555;
+    vertical-align: middle;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    display: inline-block;
+    margin-bottom: 0px !important;
+    margin-right: 2px;
+    min-width: 200px;
+}

@@ -1,0 +1,559 @@
+body{
+    /*
+    background-color: -moz-linear-gradient(center top , #F5F5F5, #F1F1F1) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    */
+    color: #333  !important;
+    font-size: 14px !important;
+    margin: 0;
+    font-family: 'Arimo', sans-serif !important;
+
+}
+
+.glyphicon{
+    color: #333;
+}
+
+
+.trigger{
+    width: 50px;
+}
+
+
+
+.dialog ul{
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.dialog li{
+    list-style: none;
+    margin-left: 0px;
+    cursor: pointer;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: 333;
+}
+
+.menu{
+    float: right;
+    width: 500px;
+    position: relative;
+    top: 20px;
+}
+
+.header-toolbox a{
+    float: right;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    position: relative;
+    top: 24px;
+    left: -10px;
+    text-decoration: none;
+}
+
+.header-toolbox a:hover{
+    /*
+    -webkit-animation-name: spaceboots;
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;*/
+    
+    color: white;
+}
+
+.header-toolbox a.msg{
+    text-decoration: none;
+}
+
+
+.system-msgs-icon{
+    text-align: center;
+    padding-top: 8px;
+    font-weight: bold;
+    position: relative;
+    top: -8px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.system-msgs-icon-error{
+    color: #a94442;
+    background-color: #ebccd1;
+    border-color: #ebccd1;
+}
+
+
+
+.jobs-button{
+    background-image: url(/static/jobs.png);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+
+
+
+
+.sign-in {
+    float: right;
+    width: 335px;
+
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #E5E5E5;
+    margin: 12px 0 0;
+    padding: 20px 25px 15px;
+}
+
+.google-sign-in {
+    text-align:center;
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #E5E5E5;
+    margin: 12px 0 0;
+    padding: 20px 25px 15px;
+}
+
+
+.grp-row h3{
+    border-bottom: dashed 1px #DDD;
+    padding-bottom: 3px;
+    text-transform: uppercase;;
+    font-size: 30px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-align: right;
+    max-width: 1100px;
+}
+
+.grp-row{
+    /*
+    position: relative;
+    overflow: hidden;
+    position: relative;
+    width: 100%;*/
+    float: left;
+    width: auto;
+    margin-right: 30px;
+    margin-bottom: 40px;
+}
+
+.app-block{
+    font-size: 12px;
+    height: 150px !important;
+    float: left;
+    overflow: hidden !important;
+    margin: 10px !important;
+    margin-left: 0px !important;
+    text-align: justify;
+    padding-right: 15px;
+}
+
+.app-thumbnail{
+    height: 150px !important;
+    width: 150px !important;
+    float: left;
+    background-repeat: no-repeat;
+    border-radius: 5px !important;
+    border: 10px solid #eee;
+    overflow: hidden !important;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.app-thumbnail a:hover{
+    color: red;
+}
+
+.app-thumbnail .title{
+    text-align: center;
+    color: #666;
+    max-height: 28px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    background-color: white;
+    overflow: hidden;
+    /*opacity:0.8;
+    filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.app-thumbnail .thumbLink{
+    margin-top: 150px;
+    background-color: black;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+    height: 50px;
+    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 10px;
+
+    color: white;
+}
+
+.app-thumbnail .thumbLink a{
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#tabs-4{
+    padding-top: 40px;
+}
+
+
+
+#loading-label{
+    position: fixed;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    display: none;
+    /*
+    top: 100px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 100px;
+    */
+    z-index: 999;
+
+    background-color: rgba(220, 220, 220, 0.7);
+    position: absolute;
+    top: 63px;
+    left: 188px;
+    width: calc(100% - 188px);
+    height: calc(100% - 63px);
+
+    
+}
+
+#loading-label div{
+    top: 100px;
+    position: relative;
+}
+
+.file2select{
+    cursor: pointer;
+}
+
+.menu{
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu ul{
+     float: right;
+     padding-right: 100px;
+}
+
+.menu li{
+    display: table-cell;
+    list-style-type: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    
+}
+
+.menu .selected a{ 
+    color: white;
+}
+
+.menu a:hover{ 
+    color: white;
+}
+
+
+.sub-menu{
+    width: 300px;
+    padding: 10px;
+    border-left: 1px solid #CCC;
+    background-color: #EEE;
+    float: right;
+    padding-top: 20px;
+}
+
+.right-menu li{
+    list-style: none;
+}
+
+.application-window{
+    display: table-cell;
+}
+
+.application-window h1, .application-window h2,
+.application-window h3, .application-window h4,
+.application-window h5
+{ 
+    padding-top: 10px !important;
+}
+
+
+
+
+.application-documentation{
+    width: 470px;
+    display: table-cell;
+    padding-left: 30px;
+    border-left: 1px solid #CCC;
+    height: 100%;
+    color: #333;
+    font-size: small;
+}
+
+.application-documentation h1{
+    font-size: 24.5px;
+}
+
+.application-documentation h2{
+    font-size: 20px;
+}
+
+.application-documentation h3{
+    font-size: 16px;
+}
+
+
+.ui-tabs-nav{
+    background-color: #f3f3f3;
+}
+
+
+#content-breadcrumbs{
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.content #top-pane{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.content #top-pane, .content #bottom-pane{
+    
+}
+
+.content #top-pane form input{
+    height: 30px !important;
+}
+
+
+.left-menu{
+    width: 200px;
+    display: table-cell;
+    position: relative;
+    vertical-align: top;
+    padding-top: 20px;
+    background-color: #222;
+}
+
+.left-menu ul{
+     margin-left: 0px;
+     padding-left: 0px;
+     list-style: none;
+
+}
+
+.left-menu li{
+     line-height: 25px;
+     /*border-bottom: 1px solid #ededed;*/
+     padding-left: 20px;
+     padding-bottom: 5px;
+     padding-top: 5px;
+     margin-left: 0px;
+     list-style: none;
+}
+
+.left-menu a:hover li{
+    background-color: #f3f3f3;
+}
+
+.left-menu a{
+    text-decoration: none;
+    color: white;
+}
+
+.left-menu a .glyphicon{
+    color: white;
+}
+
+
+.left-menu a:hover{
+    text-decoration: none;
+    color: #333;
+}
+
+.left-menu a:hover .glyphicon{
+    color: #333;
+}
+
+.left-menu li.active, .left-menu a:hover li.active, .left-menu a:hover li.active .glyphicon{
+     background-color: #08c;
+     color: white;
+}
+
+/***********************************
+************ HEADER ****************
+************************************/
+
+#header{
+    padding-bottom: 3px;
+    padding-left: 30px;
+    position: fixed;
+    width: 100%;
+    background-color: #373b3d;
+    color: white;
+    z-index: 999;
+    border-bottom: 0px ridge rgb(136, 136, 136);
+    background-image: -moz-linear-gradient(right center , #3f4345, #373b3d)
+}
+
+#header h1{
+    font-size: 30px;
+    line-height: 30px;
+}
+#header h1 a{
+    color: white;
+    display:inline-block;
+}
+
+@-webkit-keyframes spaceboots {
+    0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+    10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+    30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+    40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+    50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+    70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+    80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+    90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+    100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+#header h1 a:hover, #header h1 a:focus {
+    -webkit-animation-name: spaceboots;
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    text-decoration: none;
+}
+
+#header h1 small{ color: #CCC; }
+#header-space{ height: 53px; }
+
+
+
+.blue-text{ color:#08c; }
+.small-text{ font-size:14px; }
+
+
+.content h3{
+}
+
+.small-menu{
+    width: 160px;
+    margin: auto auto;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 50px;
+}
+
+
+.small-menu ul{
+    font-size: 13px;
+    border-top: none;
+    margin: 0px;
+}
+
+.small-menu li{
+    font-size: 13px;
+    border: none;
+    line-height: 10px;
+    padding-left: 0px;
+}
+
+.hide-button{
+    float: right;
+    position: relative;
+    right: 20px;
+    top: 2px;
+}
+
+input[type=checkbox]{
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+#server-properties tr th{
+    text-align: right;
+    padding-right: 20px;
+    vertical-align: middle;
+}
+
+#server-properties tr td{
+    height: 40px;
+    vertical-align: middle;
+}
+
+#server-properties input[type=text]{
+    padding: 10px !important; 
+    height: 30px;
+    border-radius: 0px;
+    border:1px solid #DDD;
+}
+
+
+
+.btn{
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    font-size: 14px !important;
+}
+
+.fileupload-buttonbar{
+    padding-top:5px;
+}
+
+.glyphicon-white{
+    color: white;
+}
+
+select {
+  height: 30px;
+  min-width: 231px;
+  background-color: white;
+}
+
+.statemachine-toggleButton{
+    cursor: pointer;
+}
+
+pre.msg-text{
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    background-color: transparent;
+    color: #a94442;
+}

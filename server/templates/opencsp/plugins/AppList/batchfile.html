@@ -1,0 +1,43 @@
+<ul>
+	<ol>Download this CSV file: <button  type='button' onclick="location.href='/load/{{application}}/downloadbatchfile/'" class="btn btn-danger">
+		<i class="icon-download icon-white"></i>
+		<span>Download</span>
+	</button>
+	</ol>
+	<ol>In each line of the file set the parameters for each job.</ol>
+	<ol>Upload the file to your area.</ol>
+	<ol>Submit the file in the form bellow.</ol>
+</ul>
+
+
+<form id='runbatchfileForm' action="/load/runbatchfile/"  method="post" enctype="multipart/form-data" >
+	<label for="batchfilename" title="">Batch file</label>
+	<input type="file" class="filename" name="batchfilename" id="batchfilename" value="" />
+	<button  type='button' onclick="runBatchFile();" class="btn btn-success">
+		<i class="icon-play icon-white"></i>
+		<span>Run batch file</span>
+	</button>
+</form>
+
+{% block extra_js %}
+<script type="text/javascript" src="/static/jquery.form.js" ></script>
+{% endblock %}
+
+
+
+{% block extra_scripts %}
+<script >
+	
+
+	function runBatchFile(){
+		
+		$( '#runbatchfileForm' ).ajaxSubmit({
+			url: '/load/runbatchfile/',  
+			success: function( data )  
+			{
+				$('#dialog-window').dialog('close');
+			}
+		});
+	}
+</script>
+{% endblock %}

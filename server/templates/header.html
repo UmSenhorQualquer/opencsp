@@ -1,0 +1,12 @@
+<header id="header">
+{% if user.is_authenticated %}
+    <div class='header-toolbox' >
+		<a href='/accounts/logout/'>Exit {{ user }} account</a>
+		<a href='/accounts/password/change/'>Change password</a>
+    </div>
+   {% endif %}
+    <h1>
+        <a href='/'>OpenCSP</a>
+    </h1>
+</header>
+<div id="header-space" ></div>

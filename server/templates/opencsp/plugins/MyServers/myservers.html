@@ -1,0 +1,43 @@
+<h3>My servers</h3>
+
+<div style="float:right;" >
+	<!--<button  type='button' title="Start servers instances" onclick="reserveServers();" class="btn btn-success">
+        <i class="glyphicon glyphicon-play glyphicon-white"></i>
+        <span>Run</span>
+    </button>
+    <button  type='button' title="Pause the servers instances and transfer them to my area." onclick="savePauseServers();" class="btn btn-warning">
+        <i class="glyphicon glyphicon-pause glyphicon-white"></i>
+        <span>Stop and save</span>
+    </button>-->
+    <button  type='button' title="Start servers" onclick="startServers();" class="btn btn-success">
+        <i class="glyphicon glyphicon-play glyphicon-white"></i>
+        <span>Start</span>
+    </button>
+    <button title="Stop servers instances" type='button' onclick="saveReleaseServers();" class="btn btn-danger">
+        <i class="glyphicon glyphicon-stop glyphicon-white"></i>
+        <span>Stop</span>
+    </button>
+</div>
+
+<div id='servers-browser-div'></div>
+<script type="text/javascript">
+   
+
+    function LoadServers(){
+        loading();
+        $('#servers-browser-div').dataviewer({ 
+            titles:['Server', 'Host','Type','State','Image','Reserved to',''],
+            sizes: ['auto','120px','120px','120px','120px','120px','20px'],
+            url: '/plugins/myservers/browseservers/',
+            sortingColumns: [0,5],
+            thumb_button: false,
+            list_button: false,
+            showCheckbox: true,
+            afterLoad: not_loading
+        });
+    };
+    setTimeout(LoadServers,100);
+	
+    
+    
+</script>

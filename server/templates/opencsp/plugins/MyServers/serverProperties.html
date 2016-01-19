@@ -1,0 +1,79 @@
+<style type="text/css">
+	td.value{
+		width: 100px;
+		text-align: right;
+	}
+
+</style>
+
+<form id='server-properties' >{% csrf_token %}
+	<input name='virtualserver_id' value='{{server.pk}}' type='hidden' />
+	<table style="width: 100%" >
+		<tr>
+			<th style='width:150px;' >Name:</th>
+			<td>
+				<input type='text' name='name' value='{{ server.virtualserver }}' />
+			</td>
+		</tr>
+		<tr>
+			<th style='width:150px;' >RAM:</th>
+			<td>
+				<div id="RAM-slider"></div>
+			</td>
+			<td id='RAM-value' class='value' ></td>
+		</tr>
+		<tr>
+			<th>CPU Cores:</th>
+			<td>
+				<div id="CORES-slider"></div>
+			</td>
+			<td id='CORES-value' class='value' ></td>
+		</tr>
+		<tr>
+			<th>CPU cap:</th>
+			<td>
+				<div id="CAP-slider"></div>
+			</td>
+			<td id='CAP-value' class='value' ></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td>
+				<br/>
+				<br/>
+				<br/>
+				<button type='button' onclick="saveServerProperties();" class="btn btn-success">
+			        <i class="icon-ok-circle icon-white"></i>
+			        <span>Save</span>
+			    </button>
+			    
+			</td>
+		</tr>
+	</table>
+
+</form>
+
+<script type="text/javascript">
+	$(function() {
+		$("#RAM-slider").slider({
+			min: 4, max: {{server.virtualserver.maxRam}}, 
+			change: function( event, ui ) { $('#RAM-value').html(ui.value+" Mbytes"); }
+		});
+
+		$("#CORES-slider").slider({
+			min: 1, max: {{server.virtualserver.maxCPUCores}}, 
+			change: function( event, ui ) { $('#CORES-value').html(ui.value); }
+		});
+
+		$("#CAP-slider").slider({ 
+			min: 1, max: 100,
+			change: function( event, ui ) { $('#CAP-value').html(ui.value+"%"); }
+		});
+
+
+		$("#RAM-slider").slider({   value: {{server.virtualserver.virtualserver_ram}}     });
+		$("#CORES-slider").slider({ value: {{server.virtualserver.virtualserver_cores}} });
+		$("#CAP-slider").slider({   value: {{server.virtualserver.virtualserver_cpucap}}  });
+	});
+</script>

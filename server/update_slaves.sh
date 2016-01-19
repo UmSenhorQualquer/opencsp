@@ -1,0 +1,15 @@
+fab sync_slaves_code:3
+fab sync_slaves_code:4
+fab sync_slaves_code:5
+fab sync_slaves_code:6
+fab sync_slaves_code:7
+fab sync_slaves_code:8
+fab sync_slaves_code:9
+fab sync_slaves_code:10
+fab sync_slaves_code:11
+fab sync_slaves_code:12
+fab sync_slaves_code:13
+fab sync_slaves_code:14
+fab sync_slaves_code:15
+fab sync_slaves_code:16
+fab sync_slaves_code:17

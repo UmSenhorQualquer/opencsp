@@ -1,0 +1,81 @@
+{% load jfutags %}
+
+<div id="tabs-myarea">
+    <ul>
+        {% if user.is_authenticated %}
+        <li><a href="#tabs-1">My files</a></li>
+        <li><a href="#tabs-2">Upload files</a></li>
+        {% endif %}
+        <button onclick="hideMyArea();" type="submit" class="btn btn-danger start hide-button">
+            <i class="glyphicon glyphicon-chevron-down glyphicon-white"></i>
+            <span>Hide</span>
+        </button>
+    </ul>
+    {% if user.is_authenticated %}
+    <div id="tabs-1"><div id='files-browser-div'></div></div>
+    <div id="tabs-2">{% jfu %}</div>
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+
+    function openTheStorage(){
+        window.open('{{OWNCLOUD_LINK}}','_blank');
+    };
+
+    function createFolder(){
+        var foldername = prompt("Please enter the new folder name", "Folder name");
+        if(foldername == null) return;
+
+        var currentPath = $('#files-browser-div').dataviewer('path');
+        if(currentPath==undefined || currentPath=='/') currentPath = ''
+
+        $.post('/createfolder/',
+            {path: (currentPath+'/'+foldername), csrfmiddlewaretoken: '{{ csrf_token }}' }, 
+            function(res){ $('#files-browser-div').dataviewer(); } );
+    };
+
+
+    $('#files-browser-div').dataviewer({
+        titles:['File name','Size', 'Created on',''],
+        sizes: ['auto','120px','220px','50px'],
+        url: '/browsefiles/',
+        sortingColumns: [0,1,2],
+        beforeLoad: loading,
+        afterLoad: not_loading,
+        extra_buttons: [
+            {   
+                btnId:'open-the-storage', 
+                btnLabel:'<i style="top:2px;" class="glyphicon glyphicon-hdd"></i> Storage manager', 
+                btnAction: openTheStorage
+            },
+            {   
+                btnId:'create-folder', 
+                btnLabel:'<i style="top:2px;" class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Create folder', 
+                btnAction: createFolder
+            },
+            {   
+                btnId:'reload-files', 
+                btnLabel:'<i style="top:2px;" class="glyphicon glyphicon-refresh"></i> Reload', 
+                btnAction: update_my_files
+            }
+           
+        ]
+    });
+
+    function update_my_files(){ $('#files-browser-div').dataviewer(); };
+
+    $( "#tabs-myarea" ).tabs({
+        activate: function( event, ui ) {
+            var active = $( "#tabs-myarea" ).tabs( "option", "active" );
+            if( active==2 ) $("#content-panel").split().position("100%");
+        }
+    });
+
+    //setInterval(update_my_files,30000);
+
+    function openFolder(folder){
+        $('#files-browser-div').dataviewer({url: '/browsefiles/?p='+folder, path:folder});
+        $('#files-browser-div').dataviewer();
+    }
+</script>

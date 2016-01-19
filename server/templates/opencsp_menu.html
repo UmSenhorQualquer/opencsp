@@ -1,0 +1,10 @@
+<ul>
+{% for plugin in plugins %}
+<a href="#view-{{ plugin.anchor }}" onclick="{{ plugin.JsFunction }}" >
+	<li id='menu-{{ plugin.anchor }}' >
+	{% if plugin.icon %}<i class="glyphicon glyphicon-{{plugin.icon}}"></i>{% endif %}
+	{{ plugin.label }}
+	</li>
+	</a>
+{% endfor %}
+</ul>

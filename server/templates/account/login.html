@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% load i18n %}{% load account %}{% load url from future %}
+
+{% block head %}<link rel="stylesheet" href="/static/account.css" />{% endblock %} 
+
+{% block page_content %}
+<div class='sign-up' >
+    <a href="/accounts/signup/">Sign up</a> if you are not registered yet.
+</div>
+
+<div class="content">
+    <div class='google-login'>
+        <div class="login">
+            <form id="openid_form" action='/accounts/google/login/?process=login' method="get">
+                <fieldset class="google-sign-in">
+                    <legend>{% trans "Signin with your Google account" %}</legend>
+                    <div id="openid_input_area">
+                        <img src="/static/google_logo.png">
+                        <br/>
+                        <br/>
+                        <input class="btn btn-info" type="submit" value='Sign in with your Google Account'>
+                        </a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div id="otherLogin" class="account-login">
+        <form id="auth_form" name="auth_form" action="{% url 'account_login' %}" method="post">
+            {% csrf_token %} {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+            <fieldset class="sign-in gray-box">
+                <legend>Sign in with your OpenCSP account</legend>
+                {{ form.as_p }}
+                <div class="submit-row">
+                    <input class="btn btn-info" value='{% trans "Sign In" %}' type="submit">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

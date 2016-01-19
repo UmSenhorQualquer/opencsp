@@ -1,0 +1,22 @@
+<h3>All jobs</h3>
+<div id='alljobs-browser-div'></div>
+<script type="text/javascript">
+
+	$('#alljobs-browser-div').dataviewer({ 
+		titles:[
+			'Application', 'User','Server', 'Created', 
+			'Started', 'Ended', 'Waited','Running time',
+			'', '', '', ''],
+		sizes: ['150px','auto','auto','120px','120px','120px','120px','120px','20px','20px','20px','20px'],
+		sortingColumns: [0,1,2,3,4,5],
+		url: '/plugins/jobslist/browsejobs/',
+		thumb_button: false,
+		list_button: false
+	});
+
+	function RefreshEventFunc(){
+		$('#alljobs-browser-div').dataviewer();
+	};
+	refreshEvent = setInterval(RefreshEventFunc,5000);
+	
+</script>

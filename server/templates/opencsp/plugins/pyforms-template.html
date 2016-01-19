@@ -1,0 +1,45 @@
+{% load pyforms %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/framework.css" />
+<link rel="stylesheet" type="text/css" href="/static/jqplot/jquery.jqplot.min.css" />
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="/static/jquery.json-2.4.min.js" ></script>
+<script type="text/javascript" src="/pyforms/pyforms.js"></script>
+
+<script type="text/javascript" src="/static/jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.cursor.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.logAxisRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.blockRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="/static/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+
+{% endblock %}
+
+<script type="text/javascript">
+	
+	$(function() {
+		var top_pane_width = $("#content-panel").width();
+		$(".application-window").css('width', top_pane_width+'px');
+		$('.application-tabs').tabs()
+	});
+	
+</script>
+
+<div class='application-window' >
+
+	<div style="padding-top:20px;" >
+		<h3 style='text-align:right;' class='subtitle' >{{ title|safe }}</h3>
+	</div>
+	{{ appInstance.form|safe }}
+
+</div>
+

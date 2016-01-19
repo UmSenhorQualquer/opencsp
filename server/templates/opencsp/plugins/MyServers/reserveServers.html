@@ -1,0 +1,26 @@
+
+
+<form id='reserve-servers-form' >{% csrf_token %}
+
+	Install this image <select name='operating-system-image' >
+		{% for image in images %}
+		    <option value='{{ image.pk }}' >{{ image.osimage_name }}</option>
+		{% endfor %}
+	</select>
+	on:
+	<br/>
+	<ul>
+	{% for server in servers %}
+		<li>
+			{{ server.server_name }}
+			<input type='hidden' value={{server.pk}} name='server-id' />
+		</li>
+	{% endfor %}
+	</ul>
+	<br/>
+	<br/>
+	<button  type='button' onclick="saveReserveServers();" class="btn btn-success">
+	        <i class="icon-play icon-white"></i>
+	        <span>Reserve</span>
+	    </button>
+</form>

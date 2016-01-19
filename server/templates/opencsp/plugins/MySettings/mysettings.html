@@ -1,0 +1,11 @@
+<form action='/mysettings/' style='margin:20px;' id='mysettingsform' >
+	{{ form.as_p }}
+	<input type='button' name='save' value="Save" onclick="SaveMySettings()" />
+</form>
+
+<script type="text/javascript">
+	function SaveMySettings(){
+		var data = $("#mysettingsform").serialize();
+		$('#top-pane').load("/mysettings/", data);
+	}
+</script>
