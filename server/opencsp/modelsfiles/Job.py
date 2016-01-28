@@ -52,6 +52,10 @@ class AbstractJob(models.Model):
 		if self.job_uniqueid==None or self.job_uniqueid=='':
 			self.job_uniqueid=uuid.uuid1().hex+uuid.uuid1().hex+uuid.uuid1().hex+uuid.uuid1().hex
 
+		#Checking the files total size can take a while
+		#therefore we save the job first to show the job in the web and after we calculate the total size of the data
+		super(AbstractJob,self).save()
+
 		#Find the total size of the input data ########################
 		if self.pk==None:
 			storage = AVAILABLE_STORAGES.get(self.user)

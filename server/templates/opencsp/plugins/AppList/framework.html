@@ -117,6 +117,10 @@
 		var top_pane_width = $("#content-panel").width();
 		$(".application-window").css('width', top_pane_width+'px');
 		$('.application-tabs').tabs()
+
+		$('#schedulejob-window').dialog({autoOpen: false, show: 'slideDown',width: 900, height: 600, 
+			position: { at: "top" }, draggable: false});
+
 	});
 	
 </script>
@@ -125,37 +129,34 @@
 
 	<div style="padding-top:20px;" >
 		{% if canqueue %}
-		<button onclick="ScheduleJob();" type="submit" class="btn btn-success">
-	        <i class="glyphicon glyphicon-play glyphicon-white"></i>
-	        <span>Schedule job</span>
-	    </button>
-	    {% endif %}
-	    <button onclick="BatchFile();" type="submit" class="btn btn-info">
-	        <i class="glyphicon glyphicon-upload glyphicon-white"></i>
-	        <span>Batch file</span>
-	    </button>
+			<button onclick="ScheduleJob();" type="submit" class="btn btn-success">
+				<i class="glyphicon glyphicon-play glyphicon-white"></i>
+				<span>Schedule job</span>
+			</button>	    
+			<button onclick="BatchFile();" type="submit" class="btn btn-info">
+				<i class="glyphicon glyphicon-upload glyphicon-white"></i>
+				<span>Batch file</span>
+			</button>
+		{% endif %}
 		<h3 style='text-align:right;' class='subtitle' >{{ title|safe }}</h3>
 	</div>
 	{{ appInstance.form|safe }}
 
 	{% if canqueue %}
 		<div id='schedulejob-window' class='dialog' style='display:none;' title='Schedule job' >
-		    <div id='schedulejob-window-bottom' >
-		        <label>Server:</label>
-		        <select id='schedulejob-server' ></select>
+			<div id='schedulejob-window-bottom' >
+				<label>Server:</label>
+				<select id='schedulejob-server' ></select>
 				<button style='position:relative; top:-2px;margin-left:15px;' onclick="SendJob2Queue();" type="submit" class="btn btn-success">
 					<i class="glyphicon glyphicon-play glyphicon-white"></i>
 					<span>Send job to queue</span>
 				</button>
-		    </div>
-		    <div style='clear: both;' ></div>
-		    <h3 style='text-align:center;padding-bottom:20px;' >Job parameters</h3>
-		    <div id='schedulejob-window-content' ></div>
-		    
+			</div>
+			<div style='clear: both;' ></div>
+			<h3 style='text-align:center;padding-bottom:20px;' >Job parameters</h3>
+			<div id='schedulejob-window-content' ></div>		    
 		</div>
 	{% endif %}
-
-
 </div>
 
 
