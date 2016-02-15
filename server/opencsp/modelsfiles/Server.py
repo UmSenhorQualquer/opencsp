@@ -326,6 +326,7 @@ class AbstractServer(models.Model):
 
 	
 	def check_new_jobs(self):
+		if settings.USE_CRON_TO_RUN_JOBS: return
 		command = "python {1} {0}".format( self.server_id, os.path.join(settings.SCRIPTS_ROOT, 'check_for_new.py') )
 		p = subprocess.Popen( command.split(), cwd=settings.BASE_DIR, stdout=subprocess.PIPE );
 		p.wait()

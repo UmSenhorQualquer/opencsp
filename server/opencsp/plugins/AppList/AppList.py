@@ -129,10 +129,7 @@ class AppList(OpenCSPPlugin):
 				job = Job( job_application=application, job_parameters=params, server=server, user=request.user )
 				job.save()
 
-		if server.satelliteserver==None and job!=None:
- 			os.system("cd %s; python check_for_new.py %d" % (settings.BASE_DIR,job.server.pk) )
-
-		
+		if server.satelliteserver==None and job!=None: server.check_new_jobs()
 		
 		params = {}
 		return HttpResponse('Ok')
