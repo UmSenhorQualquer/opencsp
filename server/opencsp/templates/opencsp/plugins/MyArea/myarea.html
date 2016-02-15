@@ -1,23 +1,24 @@
 {% load jfutags %}
-
-<div id="tabs-myarea">
-    <ul>
-        {% if user.is_authenticated %}
-        <li><a href="#tabs-1">My files</a></li>
-        <li><a href="#tabs-2">Upload files</a></li>
-        {% endif %}
-        <button onclick="hideMyArea();" type="submit" class="btn btn-danger start hide-button">
-            <i class="glyphicon glyphicon-chevron-down glyphicon-white"></i>
-            <span>Hide</span>
-        </button>
-    </ul>
-    {% if user.is_authenticated %}
-    <div id="tabs-1"><div id='files-browser-div'></div></div>
-    <div id="tabs-2">{% jfu %}</div>
-    {% endif %}
-</div>
+<div class="breadcrumbs" >My files</div>
+                
+<div id='files-browser-div'></div>
 
 <script type="text/javascript">
+
+    function show_upload_files_window(){
+        $('#upload-files-window').dialog(
+        {
+            autoOpen: true,
+            show: 'slideDown',
+            width: 1100,
+            height: 550,
+            position:
+            {
+                at: "top"
+            },
+            draggable: false
+        });
+    }
 
     function openTheStorage(){
         window.open('{{OWNCLOUD_LINK}}','_blank');
@@ -45,7 +46,12 @@
         afterLoad: not_loading,
         extra_buttons: [
             {   
-                btnId:'open-the-storage', 
+                btnId:'upload-files', 
+                btnLabel:'<i style="top:2px;" class="glyphicon glyphicon-upload"></i> Upload files', 
+                btnAction: show_upload_files_window
+            },
+            {   
+                btnId:'upload-the-storage', 
                 btnLabel:'<i style="top:2px;" class="glyphicon glyphicon-hdd"></i> Storage manager', 
                 btnAction: openTheStorage
             },
@@ -79,3 +85,6 @@
         $('#files-browser-div').dataviewer();
     }
 </script>
+
+
+<div id='upload-files-window' class='dialog' style='display:none;' title='Upload files'>{% jfu %}</div>

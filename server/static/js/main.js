@@ -68,14 +68,61 @@ function error_msg(msg){
 
 
 
+var main_tabs;
+
 $(function(){
 	$('body').append("<div id='dialog-msg' class='dialog' style='display:none;' title='Messages'></div>");
 	$('#dialog-msg').dialog({
-        autoOpen: false,
-        show: 'slideDown',
-        width: '80%',
-        height: 600,
-        position: {at: "top"},
-        draggable: false
-    });
+		autoOpen: false,
+		show: 'slideDown',
+		width: '80%',
+		height: 600,
+		position: {at: "top"},
+		draggable: false
+	});
+
+
+	main_tabs = $( "#content-panel" ).tabs();
+
+	// close icon: removing the tab on click
+	main_tabs.delegate( "span.ui-icon-close", "click", function() {
+		var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+		$( "#" + panelId ).remove();
+		main_tabs.tabs( "refresh" );
+	});
 });
+
+
+var tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
+
+// actual addTab function: adds new tab using the input from the form above
+function add_tab(name, label, url) {
+	var id = "tab-" + name;
+
+	if( main_tabs.find( "#"+id ).size()==0 ){
+		var li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) );
+		main_tabs.find( ".tabs-tabs" ).append( li );
+		main_tabs.append( "<div id='" + id + "' class='tab-content' ></div>" );
+		main_tabs.tabs( "refresh" );
+		//Make the tabs sortable
+		//main_tabs.find( ".ui-tabs-nav" ).sortable({ axis: "x", stop: function() { tabs.tabs( "refresh" ); } });
+	}
+	main_tabs.find( ".tabs-tabs a[href='#"+id+"']" ).click();
+
+	$("#"+id).load(url, function(response, status, xhr){
+		if(status=='error') error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
+		not_loading();
+	});
+}
+
+function select_main_tab(){
+	main_tabs.find( ".tabs-tabs a[href='#tab-0']" ).click();
+}
+
+
+var refreshEvent = setInterval(function(){},100000);
+
+
+function open_application(application){
+	add_tab(application, application, "/plugins/applist/load/"+application+"/");
+}

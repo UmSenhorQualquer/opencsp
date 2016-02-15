@@ -70,7 +70,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'sekizai.context_processors.sekizai',
-    'django_mobile.context_processors.flavour',
+    #'django_mobile.context_processors.flavour',
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
 )
@@ -144,7 +144,7 @@ SUIT_CONFIG = {
 }
 
 
-PYFORMS_APPLICATIONS_PATH       = '/home/ricardo/subversion/opencsp/applications/'
+PYFORMS_APPLICATIONS_PATH       = 'applications/'
 PYFORMS_APPLICATIONS            = ApplicationsLoader(PYFORMS_APPLICATIONS_PATH)
 
 OPENCSP_JOBS_TERMINALOUTPUT     = os.path.join( MEDIA_ROOT,'jobsoutput' )
@@ -157,11 +157,11 @@ OWNCLOUD_PASSWORD               = '4wNo8JptMWBS5GhMwPeAikUq7iPNShHfkapHR76bF5bPc
 
 LOGIN_URL                       = "/accounts/login/"
 LOGIN_REDIRECT_URL              = '/'
-ACCOUNT_EMAIL_REQUIRED          = True
-ACCOUNT_EMAIL_VERIFICATION      = 'mandatory'
-SOCIALACCOUNT_QUERY_EMAIL       = True
+#ACCOUNT_EMAIL_REQUIRED          = True
+#ACCOUNT_EMAIL_VERIFICATION      = 'mandatory'
+#SOCIALACCOUNT_QUERY_EMAIL       = True
 SOCIALACCOUNT_AUTO_SIGNUP       = False
-ACCOUNT_CONFIRM_EMAIL_ON_GET    = True
+#ACCOUNT_CONFIRM_EMAIL_ON_GET    = True
 SITE_ID                         = 1
 PYFORMS_MODE = 'WEB'
 
