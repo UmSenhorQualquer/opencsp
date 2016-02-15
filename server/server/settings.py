@@ -144,7 +144,8 @@ SUIT_CONFIG = {
 }
 
 
-PYFORMS_APPLICATIONS_PATH       = 'applications/'
+#PYFORMS_APPLICATIONS_PATH       = 'applications/'
+PYFORMS_APPLICATIONS_PATH       = '/home/ricardo/subversion/applications/'
 PYFORMS_APPLICATIONS            = ApplicationsLoader(PYFORMS_APPLICATIONS_PATH)
 
 OPENCSP_JOBS_TERMINALOUTPUT     = os.path.join( MEDIA_ROOT,'jobsoutput' )

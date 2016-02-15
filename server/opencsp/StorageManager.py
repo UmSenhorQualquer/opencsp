@@ -24,8 +24,8 @@ class StorageManager:
 				user_settings = UserSettings.objects.get(user=user)
 				storage_manager = user_settings.user_storage
 			except ObjectDoesNotExist:
-				#storage_manager = 'DefaultStorageManager'
-				storage_manager = 'LocalStorageManager'
+				storage_manager = 'DefaultStorageManager'
+				#storage_manager = 'LocalStorageManager'
 
 			classdef = self.__importClass(storage_manager)
 			self._storage[user.username] = classdef(user)
