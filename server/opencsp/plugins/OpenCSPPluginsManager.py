@@ -99,29 +99,32 @@ class OpenCSPPluginsManager(object):
 				out.write( "\tactivateMenu('menu-%s');\n" % plugin.anchor )
 
 				position = getattr(plugin, '%s_position' % view.__name__)
-					
-
+				
+				label_attr = '{0}_label'.format(view.__name__)
+				label = getattr(plugin, label_attr) if hasattr(plugin, label_attr) else view.__name__
+				
 				breadcrumbs = OpenCSPPlugin.viewBreadcrumbs(plugin, view)
-				linkname = getattr(plugin, '%s_label' % view.__name__) if hasattr(plugin, '%s_label' % view.__name__ ) else view.__name__
 				if position==LayoutPositions.TOP:
-					out.write( "\tshowBreadcrumbs(%s, '%s');\n" % (breadcrumbs, linkname) )
+					out.write( "\tshowBreadcrumbs(%s, '%s');\n" % (breadcrumbs, label) )
 				
 				
 				if hasattr(plugin, '%s_js' % view.__name__):
 					javascript = getattr(plugin, '%s_js' % view.__name__)
 					out.write( """\t%s\n""" % javascript )
 				else:		
-					if position==LayoutPositions.TOP:
+					if position==LayoutPositions.HOME:
 						out.write( "\tclearInterval(refreshEvent);\n")
-						out.write( """\t$('#top-pane').load("/plugins/%s", function(response, status, xhr){
+						out.write( """
+						select_main_tab();
+						$('#top-pane').load("/plugins/%s", function(response, status, xhr){
 							if(status=='error') error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
 							not_loading();
 						});\n""" % OpenCSPPlugin.viewJsURL(pluginClass, view) )
-					if position==LayoutPositions.BOTTOM:
-						out.write( """\t$('#bottom-pane').load("/plugins/%s", function(response, status, xhr){
-							if(status=='error') error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
-							not_loading();
-						});\n""" % OpenCSPPlugin.viewJsURL(pluginClass, view) )
+					
+					if position==LayoutPositions.NEW_TAB:
+
+						out.write('add_tab("{0}", "{1}", "/plugins/{2}");'.format(view.__name__, label, OpenCSPPlugin.viewJsURL(pluginClass, view)) )
+
 					if position==LayoutPositions.WINDOW:
 						out.write( "\tloading();" )
 						out.write( "\t$('#opencsp-window').dialog('open');\n" )

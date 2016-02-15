@@ -11,6 +11,8 @@ class LayoutPositions:
 	WINDOW = 2
 	JSON = 3
 	NEW_WINDOW = 4
+	NEW_TAB = 1
+	HOME = 0
 
 class StringArgType(object):
 	@staticmethod

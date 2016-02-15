@@ -3,7 +3,6 @@ from django.views.decorators.csrf import csrf_exempt
 from opencsp.models import AlgorithmSubject
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-import opencsp.ApplicationsSettings as appSettings
 import os, csv
 from opencsp.models import *
 from django.conf import settings

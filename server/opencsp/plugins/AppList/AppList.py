@@ -47,8 +47,9 @@ class AppList(OpenCSPPlugin):
 	def Load(request, application):
 		return AppList.__load(request, application)
 	Load_argstype = [StringArgType]
-	Load_position = LayoutPositions.TOP
-	Load_label = 'Application parameters'
+	Load_position = LayoutPositions.NEW_TAB
+	Load_label 	= 'Application'
+	Load_js = 'open_application(application);'
 	Load_breadcrumbs = []
 
 
