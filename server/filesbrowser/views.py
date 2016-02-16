@@ -14,6 +14,7 @@ import Utils.tools as tools
 import time, shlex
 
 
+
 def sizeof_fmt(num):
 	for x in ['bytes','KB','MB','GB']:
 		if num < 1000.0: return "%3.1f%s" % (num, x)
@@ -38,60 +39,58 @@ def createfolder(request):
 @never_cache
 @csrf_exempt
 def browsefiles(request):
-	try:
-		path = request.REQUEST.get('p', '/')
-		backfolder = request.REQUEST.get('backfolder', 'true') == 'true'
-		
-		storage = AVAILABLE_STORAGES.get(request.user)
+	path = request.REQUEST.get('p', '/')
+	backfolder = request.REQUEST.get('backfolder', 'true') == 'true'
+	
+	storage = AVAILABLE_STORAGES.get(request.user)
 
-		rows = []
-		if path!='/' and path!='//' and backfolder:
-			link = """<a href='javascript:openFolder("/{0}")' >..</a>""".format( os.path.split(path[1:-1])[0] )
-			rows.append({'values': [
-				link,'','','',], 
-				'small_thumb': '', 
-				'big_thumb': '', 
-				'url': '',
-				'file': '..'
-			})		
-		
 
-		for index, f in enumerate(storage.list(path)):
-			rows.append({'values': [
-					"""<a target='_blank' href='{0}' >{1}</a>""".format( f.open_link, f.filename ),
-					sizeof_fmt( f.size ), 
-					f.lastmodified,
-					"""<a href='javascript:removeFile("{0}",{1});' ><i class="glyphicon glyphicon-trash remove-button"></i></a>""".format( f.fullpath, index )
-				], 
-				'small_thumb': 	f.small_thumb, 
-				'big_thumb': 	f.big_thumb, 
-				'url': 			f.fullpath,
-				'file': 		f.fullpath,
-				'filename': 	f.filename
-			})
-		
-		#Implement the filter
-		querystring = request.REQUEST.get('q', '')
-		for q in shlex.split(querystring):
-			rows  = filter(lambda x: q in x['values'][0], rows)
-		
-		#Implement the sorting
-		sortby = request.REQUEST.get('s', '')
-		sorbylist = []
-		for col in sortby.split(','):
-			if col=='0': 	rows = sorted(rows, key=lambda x: x['values'][0])
-			elif col=='-0': rows = sorted(rows, key=lambda x: x['values'][0], reverse=True)
+	rows = []
+	if path!='/' and path!='//' and backfolder:
+		link = """<a href='javascript:openFolder("/{0}")' >..</a>""".format( os.path.split(path[1:-1])[0] )
+		rows.append({'values': [
+			link,'','','',], 
+			'small_thumb': '', 
+			'big_thumb': '', 
+			'url': '',
+			'file': '..'
+		})		
+	
 
-			if col=='1': 	rows = sorted(rows, key=lambda x: x['values'][1])
-			elif col=='-1': rows = sorted(rows, key=lambda x: x['values'][1], reverse=True)
+	for index, f in enumerate(storage.list(path)):
+		rows.append({'values': [
+				"""<a target='_blank' href='{0}' >{1}</a>""".format( f.open_link, f.filename ),
+				sizeof_fmt( f.size ), 
+				f.lastmodified,
+				"""<a href='javascript:removeFile("{0}",{1});' ><i class="glyphicon glyphicon-trash remove-button"></i></a>""".format( f.fullpath, index )
+			], 
+			'small_thumb': 	f.small_thumb, 
+			'big_thumb': 	f.big_thumb, 
+			'url': 			f.fullpath,
+			'file': 		f.fullpath,
+			'filename': 	f.filename
+		})
+	
+	#Implement the filter
+	querystring = request.REQUEST.get('q', '')
+	for q in shlex.split(querystring):
+		rows  = filter(lambda x: q in x['values'][0], rows)
+	
+	#Implement the sorting
+	sortby = request.REQUEST.get('s', '')
+	sorbylist = []
+	for col in sortby.split(','):
+		if col=='0': 	rows = sorted(rows, key=lambda x: x['values'][0])
+		elif col=='-0': rows = sorted(rows, key=lambda x: x['values'][0], reverse=True)
 
-			if col=='2': 	rows = sorted(rows, key=lambda x: x['values'][2])
-			elif col=='-2': rows = sorted(rows, key=lambda x: x['values'][2], reverse=True)
+		if col=='1': 	rows = sorted(rows, key=lambda x: x['values'][1])
+		elif col=='-1': rows = sorted(rows, key=lambda x: x['values'][1], reverse=True)
 
-		data = simplejson.dumps(rows)
-		return HttpResponse(data, "application/json")
-	except Exception as e:
-		return HttpResponseServerError(str(e))
+		if col=='2': 	rows = sorted(rows, key=lambda x: x['values'][2])
+		elif col=='-2': rows = sorted(rows, key=lambda x: x['values'][2], reverse=True)
+
+	data = simplejson.dumps(rows)
+	return HttpResponse(data, "application/json")
 
 @never_cache
 @csrf_exempt

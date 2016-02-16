@@ -1,13 +1,13 @@
 import Utils.owncloud as owncloud, os,shutil
 from django.conf import settings
-from RemoteFile import RemoteFile
+from opencsp.storagemanagers.RemoteFile import RemoteFile
 from django.utils import timezone
 import subprocess
 
 def get_thumb(fileinfo, size=32):
-	if fileinfo.file_type=='dir': return "/static/icons/folder{0}.png".format(size)
+	if fileinfo.type=='dir': return "/static/icons/folder{0}.png".format(size)
 
-	file_extension = os.path.splitext( fileinfo.path )[1]
+	file_extension = os.path.splitext( fileinfo.fullpath )[1]
 
 	if 	file_extension=='.avi' or \
 		file_extension=='.mpg' or \
@@ -23,25 +23,31 @@ def get_thumb(fileinfo, size=32):
 
 
 
-class DefaultStorageManager(object):
+class LocalStorageManager(object):
 
 	def __init__(self, user): self._user = user
 
 	def __parseFile(self, f):
 		fileobj = RemoteFile()
-		fileobj.filename 		= f.get_name()
-		fileobj.fullpath 		= f.path[:-1] if f.file_type=='dir' else f.path
-		fileobj.size 			= int(f.attributes.get('{http://owncloud.org/ns}size', f.attributes.get('{DAV:}getcontentlength', 0) ))
-		fileobj.lastmodified 	= f.attributes.get('{DAV:}getlastmodified', None)
-		fileobj.type 			= f.file_type
-		fileobj.small_thumb 	= get_thumb(f, 32)
-		fileobj.big_thumb 		= get_thumb(f, 180)
-		fileobj.download_link 	= 'javascript:openFolder("{0}")'.format(fileobj.fullpath) if f.file_type=='dir' else "{0}/index.php/apps/files/ajax/download.php?dir={1}&files={2}".format(settings.OWNCLOUD_LINK, f.get_path(), f.get_name() )
-		fileobj.open_link 		= 'javascript:openFolder("{0}")'.format(fileobj.fullpath) if f.file_type=='dir' else "{0}/index.php/apps/files/ajax/download.php?dir={1}&files={2}".format(settings.OWNCLOUD_LINK, f.get_path(), f.get_name() )
+		fileobj.filename 		= os.path.basename(f)
+		fileobj.fullpath 		= f.replace(self.user_path,'').replace('\\','/')
+		fileobj.size 			= os.path.getsize(f)
+		fileobj.lastmodified 	= os.stat(f).st_mtime 
+		fileobj.type 			= 'dir' if os.path.isdir(f) else 'file'
+		fileobj.small_thumb 	= get_thumb(fileobj, 32)
+		fileobj.big_thumb 		= get_thumb(fileobj, 180)
+		fileobj.download_link 	= 'javascript:openFolder("{0}")'.format(fileobj.fullpath) if fileobj.type=='dir' else ""
+		fileobj.open_link 		= 'javascript:openFolder("{0}")'.format(fileobj.fullpath) if fileobj.type=='dir' else ""
 		return fileobj
 
+	@property
+	def user_path(self):
+		userpath = os.path.join(settings.OPENCSP_STORAGE_AREAS_PATH,self._user.username)
+		if not os.path.isdir(userpath): os.mkdir(userpath)
+		return userpath
+
 	def __user_path(self, path):
-		return path
+		return os.path.join(self.user_path, path[1:] if path[0]=='/' else path)
 		
 	def put_file_contents(self, remote_path, data):
 		infile = open(self.__user_path(remote_path), 'wb')
@@ -65,10 +71,13 @@ class DefaultStorageManager(object):
 		return True
 
 	def list(self, path):
-		for f in os.listdir( self.__user_path(path) ):  yield self.file_info(f)
+		for f in os.listdir( self.__user_path(path) ):
+			print ".....-----"  
+			print f, self.__user_path(path), path
+			yield self.file_info( f )
 
 	def file_info(self, path):
-		return self.__parseFile( os.stat( self.__user_path(path) ) )
+		return self.__parseFile( self.__user_path(path) )
 		
 
 	def mkdir(self, path):

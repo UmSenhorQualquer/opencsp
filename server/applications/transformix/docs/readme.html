@@ -1,0 +1,49 @@
+<h3>Collaboration</h3>
+
+This software was developed by the Scientific Software Platform in collaboration with Renart's Lab to which we would like to acknowledge, in particularly Nivaldo Vasconcelos for making this project possible.
+
+<h1>Introduction</h1>
+<p>
+	The Spike Sorter application allow you to execute 2 different applications offered by the KlustaSuite.<br/>
+	These applications are:
+	<ul>
+		<li>
+			<a href='https://github.com/klusta-team/spikedetekt' taget='_blank'>SpikeDetekt</a> for detecting and extracting spikes from raw recordings.<br/>
+			(klusta --detect-only)
+		</li>
+		<li>
+			<a href='https://github.com/klusta-team/klustakwik' taget='_blank'>KlustaKwik</a> for automatically clustering the detected spikes.<br/>
+			(klusta --cluster-only)
+		</li>
+	</ul>
+
+</p>
+<p>
+	<a href='https://github.com/klusta-team/example' taget='_blank'>KlustaSuite</a> is an open source spike sorting software suite designed for extracellular recordings obtained with large multielelectrode arrays (with hundreds of channels). It is developed by Cyrille Rossant, Shabnam Kadir, Dan Goodman, Max Hunter from the CortexLab at University College London, directed by Kenneth Harris and Matteo Carandini.
+</p>
+
+<h1>Usage</h1>
+<p>A brief explanation for each field on the left panel follows.</p>
+<ol>
+	<li>
+		<b>Params file:</b> is a text file (written in Python) containing all parameters that KlustaSuite requires to spike sort the data.
+	</li>
+	<li>
+		<b>Prb file:</b> is a text file (written in Python) containing information about the probe.
+	</li>
+	<li>
+		<b>Step 1: Run detect:</b> run the command line "klusta --detect-only".
+	</li>
+	<li>
+		<b>Step 2: Run cluster:</b> run the command line "klusta --cluster-only".
+	</li>
+	<li>
+		<b>Raw data file:</b> Spikes raw data file.
+	</li>
+	<li>
+		<b>Previous result file:</b> is the zip file from a previous run, used to run the "Step 2: Run cluster".
+	</li>
+	<li>
+		<b>Result file:</b> is the output zip file, containing all the generated files.
+	</li>
+</ol>

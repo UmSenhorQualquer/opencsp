@@ -144,17 +144,18 @@ SUIT_CONFIG = {
 }
 
 
-#PYFORMS_APPLICATIONS_PATH       = 'applications/'
-PYFORMS_APPLICATIONS_PATH       = '/home/ricardo/subversion/applications/'
+PYFORMS_APPLICATIONS_PATH       = 'C:\\Users\\swp\\Documents\\opencsp\\server\\applications\\'
+#PYFORMS_APPLICATIONS_PATH       = '/home/ricardo/subversion/applications/'
 PYFORMS_APPLICATIONS            = ApplicationsLoader(PYFORMS_APPLICATIONS_PATH)
 
 OPENCSP_JOBS_TERMINALOUTPUT     = os.path.join( MEDIA_ROOT,'jobsoutput' )
 #OPENCSP_URL                     = 'http://localhost:8000'
 OPENCSP_URL                     = 'http://opencsp.champalimaud.pt'
 #OWNCLOUD_LINK                   = 'http://localhost'
+OPENCSP_DEFAULT_STORAGE_MANAGER = 'LocalStorageManager'
 OWNCLOUD_LINK                   = 'http://storage.champalimaud.pt'
-
 OWNCLOUD_PASSWORD               = '4wNo8JptMWBS5GhMwPeAikUq7iPNShHfkapHR76bF5bPcpv4tHFL'
+OPENCSP_STORAGE_AREAS_PATH      = 'C:\\Users\\swp\\Downloads'
 
 LOGIN_URL                       = "/accounts/login/"
 LOGIN_REDIRECT_URL              = '/'

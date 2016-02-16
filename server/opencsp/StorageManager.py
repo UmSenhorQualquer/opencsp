@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 import inspect, os
 
 class StorageManager:
@@ -24,8 +25,7 @@ class StorageManager:
 				user_settings = UserSettings.objects.get(user=user)
 				storage_manager = user_settings.user_storage
 			except ObjectDoesNotExist:
-				storage_manager = 'DefaultStorageManager'
-				#storage_manager = 'LocalStorageManager'
+				storage_manager = settings.OPENCSP_DEFAULT_STORAGE_MANAGER
 
 			classdef = self.__importClass(storage_manager)
 			self._storage[user.username] = classdef(user)

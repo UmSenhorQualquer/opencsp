@@ -1,6 +1,6 @@
 import Utils.owncloud as owncloud, os
 from django.conf import settings
-from RemoteFile import RemoteFile
+from opencsp.storagemanagers.RemoteFile import RemoteFile
 from django.utils import timezone
 import subprocess
 
