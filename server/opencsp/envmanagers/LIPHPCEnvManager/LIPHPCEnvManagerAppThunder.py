@@ -10,36 +10,36 @@ from fabric.contrib.files import exists
 from django.conf import settings
 from LIPHPCEnvManager import LIPHPCEnvManager
 
-paramiko.util.log_to_file("/home/ricardo/paramiko.log")
+paramiko.util.log_to_file("/home/manager/paramiko.log")
 
 class LIPHPCEnvManagerAppThunder(LIPHPCEnvManager):
 
-	def __init__(self):  super(LIPHPCEnvManagerAppThunder, self).__init__()
+    def __init__(self):  super(LIPHPCEnvManagerAppThunder, self).__init__()
 
-	
+    
 
-	def remote_script(self, job):
+    def remote_script(self, job):
         jobparams = eval(job.job_parameters)
-		
+        
         command = """#!/bin/bash
-			#######
-			# HPC #
-			#######
-			#$ -pe spark {1}
-			#$ -q hpcgrid
-			#$ -P HpcGrid
-			#$ -l infiniband=y
-			#$ -cwd
+        #######
+        # HPC #
+        #######
+        #$ -pe spark {1}
+        #$ -q hpcgrid
+        #$ -P HpcGrid
+        #$ -l infiniband=y
+        #$ -cwd
 
-			#$ -j yes
-			#$ -o output.txt
+        #$ -j yes
+        #$ -o output.txt
 
-            module load opencsp-1.0
-            module load thunder
-            thunder-submit {2}
+        module load opencsp-1.0
+        module load thunder
+        thunder-submit {2}
 
-			mkdir output
-			echo {0} > busy.no
-			""".format(job.pk ,jobparamsp['_numberofmachines'],jobparamsp['_scriptfile']).replace('\t\t\t','')
+        mkdir output
+        echo {0} > busy.no
+        """.format(job.pk ,jobparamsp['_numberofmachines'],jobparamsp['_scriptfile']).replace('\t\t\t','')
 
-		return command
+        return command
