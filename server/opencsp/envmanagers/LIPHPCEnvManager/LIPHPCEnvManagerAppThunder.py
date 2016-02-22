@@ -40,6 +40,6 @@ class LIPHPCEnvManagerAppThunder(LIPHPCEnvManager):
 
         mkdir output
         echo {0} > busy.no
-        """.format(job.pk ,jobparamsp['_numberofmachines'],jobparamsp['_scriptfile']).replace('\t\t\t','')
+        """.format(job.pk ,jobparamsp['_numberofmachines']['position'],'input'+jobparamsp['_scriptfile']).replace('\t\t\t','')
 
         return command
