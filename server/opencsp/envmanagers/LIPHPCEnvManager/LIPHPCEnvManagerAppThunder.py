@@ -34,12 +34,11 @@ class LIPHPCEnvManagerAppThunder(LIPHPCEnvManager):
         #$ -j yes
         #$ -o output.txt
 
-        module load opencsp-1.0
         module load thunder
         thunder-submit {2}
 
         mkdir output
         echo {0} > busy.no
-        """.format(job.pk ,jobparams['_numberofmachines']['position'],'input'+jobparams['_scriptfile']).replace('\t\t\t','')
+        """.format(job.pk ,jobparams['_numberofmachines']['position'],'input'+jobparams['_scriptfile']).replace('\t','')
 
         return command
