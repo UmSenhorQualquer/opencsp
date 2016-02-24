@@ -43,6 +43,12 @@
 	padding-bottom: 5px;
 }
 
+.ControlList table td.selected{
+	background-color: #08c;
+	color: white;
+}
+
+
 .ControlImage .image{
 	min-width: 300px;
 	min-height:  240px;

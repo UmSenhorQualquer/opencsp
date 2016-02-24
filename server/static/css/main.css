@@ -229,7 +229,7 @@ body{
 	margin-right:auto;
 	max-width: 100px;
 	*/
-	z-index: 100;
+	z-index: 99;
 
 	background-color: rgba(220, 220, 220, 0.7);
 	position: absolute;
@@ -347,6 +347,7 @@ body{
 .content .tab-content{
 	padding-left: 20px;
 	padding-right: 20px;
+	overflow: auto;
 }
 
 .content .tab-content form input{
@@ -370,7 +371,7 @@ body{
 	width: 100%;
 	background-color: #373b3d;
 	color: white;
-	z-index: 999;
+	z-index: 101;
 	border-bottom: 0px ridge rgb(136, 136, 136);
 	background-image: -moz-linear-gradient(right center , #3f4345, #373b3d)
 }

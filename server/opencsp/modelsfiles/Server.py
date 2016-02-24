@@ -35,7 +35,7 @@ class AbstractServer(models.Model):
 	server_hostname		= models.CharField('Host name', max_length=255, null=True, blank=True)
 	server_remotedir	= models.CharField('Host directory', max_length=255, null=True, blank=True)
 	server_active		= models.BooleanField('Active')
-	server_isalive		= models.BooleanField('Is alive')
+	server_isalive		= models.NullBooleanField('Is alive', null=True, blank=True)
 	server_lastcontact	= models.DateTimeField('Last contact', null=True, blank=True)
 	server_envmanager	= models.CharField('Environment manager', max_length=255, 
 		choices=EnvManagersList(), default='DefaultEnvManager')

@@ -1,113 +1,106 @@
 {% load pyforms %}
 
 <link rel="stylesheet" href="/static/framework.css" />
+<link rel="stylesheet" href="/static/jquery-ui.css" />
+<link rel="stylesheet" href="/static/jquery.fileupload-ui.css">
 
-<script type="text/javascript" src="/static/jquery.json-2.4.min.js" ></script>
-<script type="text/javascript" src="/pyforms/pyforms.js"></script>
-
-<script type="text/javascript" src="/static/jqplot/jquery.jqplot.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.cursor.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.logAxisRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.blockRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.barRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+<script type="text/javascript" src="/static/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/static/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/jquery-ui.js"></script>
 
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="/static/jqplot/jquery.jqplot.min.css" />
+<script type="text/javascript" src="/static/dataviewer.js"></script>
+<script type="text/javascript" src="/static/pyformsjs/pyforms.js"></script>
 
 
-<script>
+<script type="text/javascript">
 	
-	function ScheduleJob(){
-		var html= '<table style="width:95%" align="center" class="table table-hover" >';
-		
-		var currentfolder = $('#files-browser-div').dataviewer('path');
-		if(currentfolder==undefined) currentfolder = '/';
+	$(function(){
+		BaseWidget.prototype.schedule_job = function(){
+			var html= '<table style="width:95%" align="center" class="table table-hover" >';
+			
+			var currentfolder = $('#{{ appInstance.app_id }}-files-browser-div').dataviewer('path');
+			if(currentfolder==undefined) currentfolder = '/';
 
-		html += "<tbody>";
-		html += "<tr>";
-		html += "<td style='width:200px;text-align:right' ><b>Output folder</b></td>";
-		html += "<td >"+currentfolder+"<input type='hidden' value='"+currentfolder+"' id='jobOutputFolder' /></td>";
-		html += "</tr>";
-		for (index = 0; index < controls.length; index++) {
-			var name  = controls[index].DOMID;
-			var value = controls[index].rawValue();
-			var label = controls[index].LABEL;
+			html += "<tbody>";
+			html += "<tr>";
+			html += "<td style='width:200px;text-align:right' ><b>Output folder</b></td>";
+			html += "<td >"+currentfolder+"<input type='hidden' value='"+currentfolder+"' id='{{ appInstance.app_id }}-job-output-folder' /></td>";
+			html += "</tr>";
+			for (var index = 0; index < this.controls.length; index++) {
+				var name  = this.controls[index].DOMID;
+				var value = this.controls[index].rawValue();
+				var label = this.controls[index].LABEL;
 
-			if((typeof value !== "undefined") && (typeof name !== "undefined") && (typeof label !== "undefined")){
-				html+="<tr>";
-				html+="<td style='width:200px;text-align:right' ><b>"+label+"</b></td>";
-				html+="<td >"+value+"</td>";
-				html+="</tr>";
-			}
-		}
-		html += "</tbody>";
-		html += "</table>";
-		$('#schedulejob-window-content').html( html );
-		$.ajax({
-			dataType: "json",
-			cache: false,
-			url: '/browseservers/'+APPLICATION+'/',
-			success: function(res){
-				var select = document.getElementById('schedulejob-server');
-				select.options.length = 0;
-				var option=document.createElement("option");
-				option.text='Auto'; option.id = 0; select.add(option);
-
-				for (index = 0; index < res.length; index++) {
-					var id = res[index][0];
-					var name = res[index][1];
-					var option=document.createElement("option");
-					option.text=name;
-					option.id = id;
-					select.add(option);
+				if((typeof value !== "undefined") && (typeof name !== "undefined") && (typeof label !== "undefined")){
+					html+="<tr>";
+					html+="<td style='width:200px;text-align:right' ><b>"+label+"</b></td>";
+					html+="<td >"+value+"</td>";
+					html+="</tr>";
 				}
 			}
-		});
-		$('#schedulejob-window').dialog('open');
-	}
+			html += "</tbody>";
+			html += "</table>";
+			$('#{{ appInstance.app_id }}-schedulejob-window-content').html( html );
+			$.ajax({
+				dataType: "json",
+				cache: false,
+				url: '/browseservers/'+this.application+'/',
+				success: function(res){
+					var select = document.getElementById('{{ appInstance.app_id }}-schedulejob-server');
+					select.options.length = 0;
+					var option=document.createElement("option");
+					option.text='Auto'; option.id = 0; select.add(option);
 
-	function SendJob2Queue(){
-		
-		var params = { userpath: $('#jobOutputFolder').val() };
+					for (index = 0; index < res.length; index++) {
+						var id = res[index][0];
+						var name = res[index][1];
+						var option=document.createElement("option");
+						option.text=name;
+						option.id = id;
+						select.add(option);
+					}
+				}
+			});
+			$('#{{ appInstance.app_id }}-schedulejob-window').dialog('open');
 
-		for (index = 0; index < controls.length; index++) {
-			var name = controls[index].DOMID;
-			params[name] = controls[index].getValue();			
 		}
 
-		var jsondata =  $.toJSON( params );
-		var server = $("#schedulejob-server").find('option:selected').attr('id');
-		$.ajax({
-			method: 'post',
-			cache: false,
-			dataType: "json",
-			url: '/queue/'+APPLICATION+'/'+server+'/',
-			contentType: "application/json; charset=utf-8",
-			data: jsondata,
-			success: function(res){
-				success_msg(res.msg);
-			},
-            error: function(xhr){
-                error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
-            }
-		});
-		$('#schedulejob-window').dialog('close');
-	}
 
-	function BatchFile(){
-		$('#dialog-window').dialog('open');
-		$('#dialog-window').load('/load/'+APPLICATION+'/batchfile/');
-	}
+		BaseWidget.prototype.send_job_2_queue = function(){
+			
+			var params = { userpath: $('#{{ appInstance.app_id }}-job-output-folder').val() };
 
-	
+			for (var index = 0; index < this.controls.length; index++) {
+				var name = this.controls[index].DOMID;
+				params[name] = this.controls[index].getValue();			
+			}
+
+			var jsondata =  $.toJSON( params );
+			var server = $("#{{ appInstance.app_id }}-schedulejob-server").find('option:selected').attr('id');
+			$.ajax({
+				method: 'post',
+				cache: false,
+				dataType: "json",
+				url: '/queue/'+this.application+'/'+server+'/',
+				contentType: "application/json; charset=utf-8",
+				data: jsondata,
+				success: function(res){
+					success_msg(res.msg);
+				},
+	            error: function(xhr){
+	                error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
+	            }
+			});
+			$('#{{ appInstance.app_id }}-schedulejob-window').dialog('close');
+		}
+
+		BaseWidget.prototype.batch_file = function(){
+			$('#dialog-window').dialog('open');
+			$('#dialog-window').load('/load/'+this.application+'/batchfile/');
+		}
+
+	});
 </script>
 
 
@@ -118,7 +111,7 @@
 		$(".application-window").css('width', top_pane_width+'px');
 		$('.application-tabs').tabs()
 
-		$('#schedulejob-window').dialog({autoOpen: false, show: 'slideDown',width: 900, height: 600, 
+		$('#{{ appInstance.app_id }}-schedulejob-window').dialog({autoOpen: false, show: 'slideDown',width: 900, height: 600, 
 			position: { at: "top" }, draggable: false});
 
 	});
@@ -130,11 +123,11 @@
 
 	<div style="padding-top:20px;" >
 		{% if canqueue %}
-			<button onclick="ScheduleJob();" type="submit" class="btn btn-success">
+			<button onclick="pyforms.find_app('{{ appInstance.app_id }}').schedule_job();" type="submit" class="btn btn-success">
 				<i class="glyphicon glyphicon-play glyphicon-white"></i>
 				<span>Schedule job</span>
 			</button>	    
-			<button onclick="BatchFile();" type="submit" class="btn btn-info">
+			<button onclick="pyforms.find_app('{{ appInstance.app_id }}').batch_file();" type="submit" class="btn btn-info">
 				<i class="glyphicon glyphicon-upload glyphicon-white"></i>
 				<span>Batch file</span>
 			</button>
@@ -144,18 +137,18 @@
 	{{ appInstance.form|safe }}
 
 	{% if canqueue %}
-		<div id='schedulejob-window' class='dialog' style='display:none;' title='Schedule job' >
-			<div id='schedulejob-window-bottom' >
+		<div id='{{ appInstance.app_id }}-schedulejob-window' class='dialog' style='display:none;' title='Schedule job' >
+			<div id='{{ appInstance.app_id }}-schedulejob-window-bottom' >
 				<label>Server:</label>
-				<select id='schedulejob-server' ></select>
-				<button style='position:relative; top:-2px;margin-left:15px;' onclick="SendJob2Queue();" type="submit" class="btn btn-success">
+				<select id='{{ appInstance.app_id }}-schedulejob-server' ></select>
+				<button style='position:relative; top:-2px;margin-left:15px;' onclick="pyforms.find_app('{{ appInstance.app_id }}').send_job_2_queue();" type="submit" class="btn btn-success">
 					<i class="glyphicon glyphicon-play glyphicon-white"></i>
 					<span>Send job to queue</span>
 				</button>
 			</div>
 			<div style='clear: both;' ></div>
 			<h3 style='text-align:center;padding-bottom:20px;' >Job parameters</h3>
-			<div id='schedulejob-window-content' ></div>		    
+			<div id='{{ appInstance.app_id }}-schedulejob-window-content' ></div>		    
 		</div>
 	{% endif %}
 </div>

@@ -1,6 +1,7 @@
 {% extends "base.html" %}{% load jfutags %}{% load url from future %}{% load thumbnail %}
 
 {% block css %}
+	<link rel="stylesheet" href="/static/framework.css" />
 	<link rel="stylesheet" href="/static/user-area.css" />
 	<link rel="stylesheet" href="/static/jquery-ui.css" />
 	<link rel="stylesheet" href="/static/jquery.fileupload-ui.css">
@@ -78,6 +79,12 @@
 			},
 			draggable: false
 		});
+
+		var viewportWidth = $(window).width();
+		var viewportHeight = $(window).height();
+
+		$('.content .tab-content').css('max-height', viewportHeight+'px');
+
 
 		LoadCurrentView();
 	});

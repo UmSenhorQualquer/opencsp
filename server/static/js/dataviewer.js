@@ -49,7 +49,7 @@ function removeFile(filename, file_num){
 				var view = Cookies.get('dataviewer-data-view'+self.selector.replace("#",'')); 
 				if(view) settings.view = view;
 				if(settings.url==='') settings.searchField=false;
-
+				this.settings = settings;
 				
 				this.html("<div class='dataviewer-bar' ></div><div class='dataviewer-data' ></div>");
 				if(settings.show_crumbs) this.find(".dataviewer-bar").append("<div class='dataviewer-bar-path' ></div>");
@@ -101,9 +101,9 @@ function removeFile(filename, file_num){
 				firstTime = true;
 			}else{
 				jQuery.extend(settings, options || {});
-				if( (typeof options)=='string' ) return settings[options];
 			}
-			
+			if( (typeof options)=='string' ) return settings[options];
+
 			this.data('settings_'+self.selector.replace("#",''), settings);
 		  
 		  	this.getvalues = function(){
