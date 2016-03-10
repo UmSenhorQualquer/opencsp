@@ -1,3 +1,9 @@
+function runApplistLoad(application){
+	loading();
+	activateMenu('menu-applist');
+	open_application(application);
+}
+
 function runApplistLoadjob(application,job){
 	loading();
 	activateMenu('menu-applist');
@@ -9,12 +15,6 @@ function runApplistLoadjob(application,job){
 							if(status=='error') error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
 							not_loading();
 						});
-}
-
-function runApplistLoad(application){
-	loading();
-	activateMenu('menu-applist');
-	open_application(application);
 }
 
 function runApplist(){
@@ -48,11 +48,6 @@ function runJobslist(){
 						});
 }
 
-function runMyserversBrowseservers(){
-	loading();
-	activateMenu('menu-myservers');
-}
-
 function runMyservers(){
 	loading();
 	activateMenu('menu-myservers');
@@ -64,6 +59,11 @@ function runMyservers(){
 							if(status=='error') error_msg(xhr.status+" "+xhr.statusText+": "+xhr.responseText);
 							not_loading();
 						});
+}
+
+function runMyserversBrowseservers(){
+	loading();
+	activateMenu('menu-myservers');
 }
 
 function runMyarea(){
@@ -128,21 +128,21 @@ function LoadCurrentView(){
 	var view = anchor.substring(5, paramsStartIndex);
 	var params = anchor.substring(paramsStartIndex+1).split('+');
 
-	if(view=='applist-loadjob') runApplistLoadjob.apply(null, params);
 	if(view=='applist-load') runApplistLoad.apply(null, params);
+	if(view=='applist-loadjob') runApplistLoadjob.apply(null, params);
 	if(view=='applist') runApplist.apply(null, params);
+	if(view=='jobslist-run_job') runJobslistRun_job.apply(null, params);
+	if(view=='jobslist-check_job_output') runJobslistCheck_job_output.apply(null, params);
 	if(view=='jobslist-check_job_parameters') runJobslistCheck_job_parameters.apply(null, params);
 	if(view=='jobslist-browsejobs') runJobslistBrowsejobs.apply(null, params);
 	if(view=='jobslist') runJobslist.apply(null, params);
 	if(view=='jobslist-kill_job') runJobslistKill_job.apply(null, params);
 	if(view=='jobslist-check_output_files') runJobslistCheck_output_files.apply(null, params);
 	if(view=='jobslist-reset_job') runJobslistReset_job.apply(null, params);
-	if(view=='jobslist-run_job') runJobslistRun_job.apply(null, params);
-	if(view=='jobslist-check_job_output') runJobslistCheck_job_output.apply(null, params);
-	if(view=='myservers-synchronize_server') runMyserversSynchronize_server.apply(null, params);
-	if(view=='myservers-browseservers') runMyserversBrowseservers.apply(null, params);
 	if(view=='myservers') runMyservers.apply(null, params);
+	if(view=='myservers-synchronize_server') runMyserversSynchronize_server.apply(null, params);
 	if(view=='myservers-installcluster') runMyserversInstallcluster.apply(null, params);
+	if(view=='myservers-browseservers') runMyserversBrowseservers.apply(null, params);
 	if(view=='myarea') runMyarea.apply(null, params);
 	if(view=='adminarea') runAdminarea.apply(null, params);
 	if(view=='adminstats') runAdminstats.apply(null, params);

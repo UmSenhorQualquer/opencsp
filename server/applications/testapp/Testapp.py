@@ -8,9 +8,9 @@ class Testapp(BaseWidget):
 
 		self._inputpoints 	= ControlFile('Input Points')
 		self._transfparam0 = ControlDate('Transformation Parameters 0')
-		self._transfparam1 = ControlImage('Bounding')
+		self._transfparam1 = ControlPlayer('Bounding')
 		self._outputfile 	= ControlText('Result file')
-		#self._table		= ControlList('Table')
+		self._table			= ControlList('Table')
 		self._btn			= ControlButton('edit')
 
 		self._formset = [ 
@@ -20,11 +20,10 @@ class Testapp(BaseWidget):
 				'_table'
 			]
 
-		#self._table.horizontalHeaders = ['Column 1', 'Column 2']
-		#self._table.selectEntireRow = True
-		#self._table.readOnly = True
-
-		#self._table.value = [['Row1'],['Row2'],['Row3','Row3-Col1']]
+		self._table.horizontalHeaders 	= ['Column 1', 'Column 2']
+		self._table.selectEntireRow 	= True
+		self._table.readOnly 			= False
+		self._table.value 				= [['Row1'],['Row2'],['Row3','Row3-Col1']]
 
 		
 		self._btn.value = self.__clicked

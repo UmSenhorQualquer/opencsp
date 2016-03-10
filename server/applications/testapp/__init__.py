@@ -9,5 +9,7 @@ from pyforms.Controls import ControlDate
 from pyforms.Controls import ControlImage
 from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlSlider
+from pyforms.Controls import ControlList
+from pyforms.Controls import ControlPlayer
 from pyforms.Utils 	import tools
 import pyforms
