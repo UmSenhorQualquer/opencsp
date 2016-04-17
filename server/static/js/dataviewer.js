@@ -267,16 +267,18 @@ function removeFile(filename, file_num){
 							}
 						});
 
-						self.find(".tableviewer-row td").dblclick(function(){
-							var cell = $(this);
-							var value = cell.html();
-							cell.html('<input type="text" value="'+value+'" />');
-							cell.children('input').focus();
-							cell.children('input').focusout(function(){
-								cell.html($(this).val());
-								if(settings.cellEdited) settings.cellEdited();
+						if(settings.editable){
+							self.find(".tableviewer-row td").dblclick(function(){
+								var cell = $(this);
+								var value = cell.html();
+								cell.html('<input type="text" value="'+value+'" />');
+								cell.children('input').focus();
+								cell.children('input').focusout(function(){
+									cell.html($(this).val());
+									if(settings.cellEdited) settings.cellEdited();
+								});
 							});
-						});
+						}
 					}
 					if(settings.view=='thumb'){
 						self.find(".dataviewer-data").html("");

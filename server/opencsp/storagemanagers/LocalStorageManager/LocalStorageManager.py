@@ -51,7 +51,10 @@ class LocalStorageManager(object):
 		
 	def put_file_contents(self, remote_path, data):
 		infile = open(self.__user_path(remote_path), 'wb')
-		infile.write(data)
+		buff = data.read()
+		while len(buff)>0:
+			infile.write(buff)
+			buff = data.read()
 		infile.close()
 		return True
 
@@ -72,8 +75,6 @@ class LocalStorageManager(object):
 
 	def list(self, path):
 		for f in os.listdir( self.__user_path(path) ):
-			print ".....-----"  
-			print f, self.__user_path(path), path
 			yield self.file_info( f )
 
 	def file_info(self, path):
@@ -84,5 +85,7 @@ class LocalStorageManager(object):
 		os.mkdir( self.__user_path( path) )
 		return True
 
-	def public_link(self, path): return None
+	def public_link(self, path): return self.__user_path(path)
+
+	def public_download_link(self, path): return self.__user_path(path)
 		

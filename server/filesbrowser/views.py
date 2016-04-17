@@ -39,8 +39,8 @@ def createfolder(request):
 @never_cache
 @csrf_exempt
 def browsefiles(request):
-	path = request.REQUEST.get('p', '/')
-	backfolder = request.REQUEST.get('backfolder', 'true') == 'true'
+	path = request.POST.get('p', '/')
+	backfolder = request.POST.get('backfolder', 'true') == 'true'
 	
 	storage = AVAILABLE_STORAGES.get(request.user)
 
@@ -72,12 +72,12 @@ def browsefiles(request):
 		})
 	
 	#Implement the filter
-	querystring = request.REQUEST.get('q', '')
+	querystring = request.POST.get('q', '')
 	for q in shlex.split(querystring):
 		rows  = filter(lambda x: q in x['values'][0], rows)
 	
 	#Implement the sorting
-	sortby = request.REQUEST.get('s', '')
+	sortby = request.POST.get('s', '')
 	sorbylist = []
 	for col in sortby.split(','):
 		if col=='0': 	rows = sorted(rows, key=lambda x: x['values'][0])
@@ -116,7 +116,7 @@ def upload_delete( request, filename ):
 @never_cache
 @require_POST
 def upload( request ):
-	path = request.REQUEST.get('path','/')
+	path = request.POST.get('path','/')
 
 	files = upload_receive( request )
 	if not isinstance(files, list): files = [files]

@@ -94,3 +94,8 @@ class DefaultStorageManager(object):
 		res = self._oc.share_file_with_link(path)
 		self.__logout()
 		return res
+
+	def public_download_link(self, path): 
+		link = self.storage.public_link(value)
+		return "{1}/index.php/s/{0}/download".format(link.token, settings.OWNCLOUD_LINK)
+		

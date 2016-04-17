@@ -25,11 +25,13 @@ class Testapp(BaseWidget):
 		self._table.readOnly 			= False
 		self._table.value 				= [['Row1'],['Row2'],['Row3','Row3-Col1']]
 
-		
+
 		self._btn.value = self.__clicked
 
 	def __clicked(self):
 		self._outputfile.value = 'ricardo'
+		self._transfparam1.value = '/Videos Para Ricardo Testar 5.avi'
+		
 		#self._outputfile.value = self._table.value[self._table.mouseSelectedRowIndex][0]
 
 ##################################################################################################################
