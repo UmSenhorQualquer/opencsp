@@ -1,47 +1,17 @@
 {% load pyforms %}
 
-{% block extra_css %}
 <link rel="stylesheet" href="/static/framework.css" />
-<link rel="stylesheet" type="text/css" href="/static/jqplot/jquery.jqplot.min.css" />
-{% endblock %}
+<link rel="stylesheet" href="/static/jquery-ui.css" />
+<link rel="stylesheet" href="/static/jquery.fileupload-ui.css">
 
-{% block extra_js %}
-<script type="text/javascript" src="/static/jquery.json-2.4.min.js" ></script>
+<script type="text/javascript" src="/static/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/static/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/jquery-ui.js"></script>
 
-<script type="text/javascript" src="/pyforms/scripts/ControlBase.js"></script>
-<script type="text/javascript" src="/pyforms/scripts/ControlText.js"></script>
-<script type="text/javascript" src="/pyforms/scripts/BaseWidget.js"></script>
-<script type="text/javascript" src="/pyforms/scripts/PyFormsAppsManager.js"></script>
 
-<script type="text/javascript" src="/static/jqplot/jquery.jqplot.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.cursor.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.logAxisRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.blockRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.barRenderer.min.js"></script>
-<script type="text/javascript" src="/static/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+<script type="text/javascript" src="/static/dataviewer.js"></script>
+<script type="text/javascript" src="/static/pyformsjs/pyforms.js"></script>
 
-{% endblock %}
 
-<script type="text/javascript">
-	
-	$(function() {
-		var top_pane_width = $("#content-panel").width();
-		$(".application-window").css('width', top_pane_width+'px');
-		$('.application-tabs').tabs()
-	});
-	
-</script>
-
-<div class='application-window' >
-	<div style="padding-top:20px;" >
-		<h3 style='text-align:right;' class='subtitle' >{{ title|safe }}</h3>
-	</div>
-	{{ appInstance.form|safe }}
-</div>
-
+<div class="breadcrumbs" >Application > {{ title|safe }}</div>
+<div class='application-window' >{{ appInstance.form|safe }}</div>
