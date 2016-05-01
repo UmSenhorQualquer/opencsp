@@ -6,7 +6,7 @@ class Testapp(BaseWidget):
 	def __init__(self):
 		super(Testapp,self).__init__('Test')
 
-		self._inputpoints 	= ControlFile('Input Points')
+		self._inputpoints 	= ControlDir('Input Points')
 		self._transfparam0 = ControlDate('Transformation Parameters 0')
 		self._transfparam1 = ControlPlayer('Bounding')
 		self._outputfile 	= ControlText('Result file')
