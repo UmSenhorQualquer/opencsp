@@ -39,8 +39,8 @@ def createfolder(request):
 @never_cache
 @csrf_exempt
 def browsefiles(request):
-	path = request.POST.get('p', '/')
-	backfolder = request.POST.get('backfolder', 'true') == 'true'
+	path = request.GET.get('p', '/')
+	backfolder = request.GET.get('backfolder', 'true') == 'true'
 	
 	storage = AVAILABLE_STORAGES.get(request.user)
 

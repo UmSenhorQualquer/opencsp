@@ -121,6 +121,17 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'cloudprocessing',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '123',                  # Not used with sqlite3.
+        'HOST': '10.40.11.123',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -145,7 +156,7 @@ SUIT_CONFIG = {
 
 
 PYFORMS_APPLICATIONS_PATH       = 'C:\\Users\\swp\\Documents\\opencsp\\server\\applications\\'
-#PYFORMS_APPLICATIONS_PATH       = '/home/ricardo/subversion/applications/'
+PYFORMS_APPLICATIONS_PATH       = '/home/ricardo/subversion/applications/'
 PYFORMS_APPLICATIONS            = ApplicationsLoader(PYFORMS_APPLICATIONS_PATH)
 
 OPENCSP_JOBS_TERMINALOUTPUT     = os.path.join( MEDIA_ROOT,'jobsoutput' )
@@ -153,6 +164,7 @@ OPENCSP_JOBS_TERMINALOUTPUT     = os.path.join( MEDIA_ROOT,'jobsoutput' )
 OPENCSP_URL                     = 'http://opencsp.champalimaud.pt'
 #OWNCLOUD_LINK                   = 'http://localhost'
 OPENCSP_DEFAULT_STORAGE_MANAGER = 'LocalStorageManager'
+OPENCSP_DEFAULT_STORAGE_MANAGER = 'DefaultStorageManager'
 OWNCLOUD_LINK                   = 'http://storage.champalimaud.pt'
 OWNCLOUD_PASSWORD               = '4wNo8JptMWBS5GhMwPeAikUq7iPNShHfkapHR76bF5bPcpv4tHFL'
 OPENCSP_STORAGE_AREAS_PATH      = 'C:\\Users\\swp\\Downloads'
@@ -173,4 +185,4 @@ PYFORMS_MODE = 'WEB'
 TIME_WAITTING_FOR_SERVER_TO_STARTUP      = 30
 WAITING_TIME_BEFORE_SHUTTING_DOWN_SERVER = 60
 WAITING_TIME_BEFORE_UNMOUNT_USER_AREA    = 180
-USE_CRON_TO_RUN_JOBS                     = True
+USE_CRON_TO_RUN_JOBS                     = False

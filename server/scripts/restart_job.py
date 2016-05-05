@@ -8,6 +8,6 @@ from opencsp.models import *
 job = Job.objects.get(pk=sys.argv[1])
 job.job_started = None
 job.job_ended = None
-job.job_state = ''
+job.job_state = None
 job.ouput = ''
 job.save()
